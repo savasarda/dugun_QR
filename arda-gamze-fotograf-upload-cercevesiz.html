@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arda & Gamze Fotoğraf Paylaşımı</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f9f9f9, #fff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 50px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    .banner {
+      width: 100%;
+      border-radius: 20px 20px 0 0;
+    }
+    input[type="text"], input[type="file"] {
+      margin: 12px 0;
+      padding: 12px;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    button {
+      background-color: #c44569;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #a63f5c;
+    }
+    h2 {
+      color: #c44569;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      font-size: 0.95em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="banner" src="https://cdn.pixabay.com/photo/2016/11/29/03/13/roses-1869622_1280.jpg" alt="Arda & Gamze Banner">
+    <h2>Arda & Gamze Düğün Fotoğrafları</h2>
+    <p>Bu özel günü birlikte ölümsüzleştirelim. Lütfen adınızı yazıp fotoğraflarınızı yükleyin 💕</p>
+    <form action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST" enctype="multipart/form-data">
+      <input type="text" name="isim" placeholder="Adınız Soyadınız" required>
+      <input type="file" name="dosya" accept="image/*,video/*" required>
+      <button type="submit">📤 Fotoğrafı Yükle</button>
+    </form>
+  </div>
+</body>
+</html>
