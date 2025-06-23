@@ -93,7 +93,7 @@
       reader.onload = function() {
         // Dosyayı base64 olarak gönderiyoruz
         const base64 = reader.result.split(',')[1];
-        fetch('https://script.google.com/macros/s/AKfycbwYne42goRCKujcI4LXzf2vjamYXd79jzeDytpueIjY4LSqTEpPYUAyRM1CrxHdwjT4lg/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbyhnQCiiBAl3h1vo72VkBeLa1FU910ZRw6vp0h5ZzhK0OON_oQwK-t-EGXbD0UO1KddwQ/exec', {
           method: 'POST',
           body: JSON.stringify({
             isim: isim,
