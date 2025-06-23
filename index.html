@@ -70,11 +70,51 @@
     <img class="banner" src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80" alt="Çiçekli Banner">
     <h2>Arda & Gamze Düğün Fotoğrafları</h2>
     <p>Bu özel günü birlikte ölümsüzleştirelim. Lütfen adınızı yazıp fotoğraflarınızı yükleyin 💕</p>
-    <form action="https://script.google.com/macros/s/AKfycbwYne42goRCKujcI4LXzf2vjamYXd79jzeDytpueIjY4LSqTEpPYUAyRM1CrxHdwjT4lg/exec" method="POST" enctype="multipart/form-data">
-      <input type="text" name="isim" placeholder="Adınız Soyadınız" required>
-      <input type="file" name="dosya" accept="image/*,video/*" required>
+    <form id="uploadForm">
+      <input type="text" name="isim" id="isim" placeholder="Adınız Soyadınız" required>
+      <input type="file" name="dosya" id="dosya" accept="image/*,video/*" required>
       <button type="submit">📤 Fotoğrafı Yükle</button>
     </form>
+    <div id="sonuc"></div>
   </div>
+  <script>
+    const form = document.getElementById('uploadForm');
+    const sonuc = document.getElementById('sonuc');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const isim = document.getElementById('isim').value;
+      const dosyaInput = document.getElementById('dosya');
+      const dosya = dosyaInput.files[0];
+      if (!dosya) {
+        sonuc.innerText = "Lütfen bir dosya seçin.";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function() {
+        // Dosyayı base64 olarak gönderiyoruz
+        const base64 = reader.result.split(',')[1];
+        fetch('https://script.google.com/macros/s/AKfycbwYne42goRCKujcI4LXzf2vjamYXd79jzeDytpueIjY4LSqTEpPYUAyRM1CrxHdwjT4lg/exec', {
+          method: 'POST',
+          body: JSON.stringify({
+            isim: isim,
+            file: base64,
+            contentType: dosya.type
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(r => r.text())
+        .then(data => {
+          sonuc.innerText = data;
+          form.reset();
+        })
+        .catch(err => {
+          sonuc.innerText = "Bir hata oluştu: " + err.message;
+        });
+      };
+      reader.readAsDataURL(dosya);
+    });
+  </script>
 </body>
 </html>
